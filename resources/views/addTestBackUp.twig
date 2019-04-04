@@ -1,0 +1,119 @@
+{% extends 'templates/base.twig' %}
+
+{% block head %}
+    <title>Добавить тест</title>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-6 offset-md-3">
+        <h1>Новый тест</h1>
+        <form action="{{ path_for('add_test') }}" method="post">
+            <div class="form-group">
+                <label for="title">Название</label>
+                <input type="text" class="form-control" name="test_title" id="title">
+            </div>
+            <div class="form-group">
+                <label for="description">Описание</label>
+                <input type="text" class="form-control" name="test_description" id="description">
+            </div>
+            <div id="cards">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="form-group">
+                            <label for="question_1">Вопрос</label>
+                            <input type="text" class="form-control" name="question_1" id="question_1">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <input type="text" class="form-control w-75 ml-3" name="option_1-1">
+                                <input type="checkbox" class="ml-3 mt-2" name="check_1-1" id="check_1-1">
+                                <label class="form-check-label ml-2 mt-1" for="check_1-1">Правильный ответ</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <input type="text" class="form-control w-75 ml-3" name="option_1-2">
+                                <input type="checkbox" class="ml-3 mt-2" name="check_1-2" id="check_1-2">
+                                <label class="form-check-label ml-2 mt-1" for="check_1-2">Правильный ответ</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <input type="text" class="form-control w-75 ml-3" name="option_1-3">
+                                <input type="checkbox" class="ml-3 mt-2" name="check_1-3" id="check_1-3">
+                                <label class="form-check-label ml-2 mt-1" for="check_1-3">Правильный ответ</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <input type="text" class="form-control w-75 ml-3" name="option_1-4">
+                                <input type="checkbox" class="ml-3 mt-2" name="check_1-4" id="check_1-4">
+                                <label class="form-check-label ml-2 mt-1" for="check_1-4">Правильный ответ</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="button" class="btn btn-sm btn-primary mt-2" onclick="addQuestion()" id="addQue" value="+ Добавить вопрос">
+
+            <button class="btn btn-primary mt-2 float-right" type="submit">Создать тест</button>
+            {{ csrf.field | raw }}
+        </form>
+    </div>
+
+    <script>
+        let cards = document.getElementById('cards');
+        let que_cnt = 1;
+
+        function getTemplate(cnt) {
+            let question_template = `
+                    <div class="card-header">
+                        <div class="form-group">
+                            <label for="question_1">Вопрос</label>
+                            <input type="text" class="form-control" name="question_${cnt}" id="question_${cnt}">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <input type="text" class="form-control w-75 ml-3" name="option_${cnt}-1">
+                                <input type="checkbox" class="ml-3 mt-2" name="check_${cnt}-1" id="check_${cnt}-1">
+                                <label class="form-check-label ml-2 mt-1" for="check_${cnt}-1">Правильный ответ</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <input type="text" class="form-control w-75 ml-3" name="option_${cnt}-2">
+                                <input type="checkbox" class="ml-3 mt-2" name="check_${cnt}-2" id="check_${cnt}-2">
+                                <label class="form-check-label ml-2 mt-1" for="check_${cnt}-2">Правильный ответ</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <input type="text" class="form-control w-75 ml-3" name="option_${cnt}-3">
+                                <input type="checkbox" class="ml-3 mt-2" name="check_${cnt}-3" id="check_${cnt}-3">
+                                <label class="form-check-label ml-2 mt-1" for="check_${cnt}-3">Правильный ответ</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <input type="text" class="form-control w-75 ml-3" name="option_${cnt}-4">
+                                <input type="checkbox" class="ml-3 mt-2" name="check_${cnt}-4" id="check_${cnt}-4">
+                                <label class="form-check-label ml-2 mt-1" for="check_${cnt}-4">Правильный ответ</label>
+                            </div>
+                        </div>
+                    </div>
+`;
+            return question_template;
+        }
+
+        function addQuestion() {
+            let div = document.createElement('div');
+            div.setAttribute('class', 'card mt-3');
+            div.innerHTML = getTemplate(++que_cnt);
+            cards.appendChild(div);
+        }
+    </script>
+{% endblock %}

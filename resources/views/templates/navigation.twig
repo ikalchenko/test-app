@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+    <a class="navbar-brand" href="{{ path_for('home') }}">Tests!</a>
+    <ul class="navbar-nav mr-auto">
+    {% if auth.user %}
+        <li><a class="nav-item nav-link" href="{{ path_for('test_list') }}">Тесты</a></li>
+        <li><a class="nav-item nav-link" href="{{ path_for('certificate') }}">Сертификаты</a></li>
+    {% endif %}
+    </ul>
+
+    {% if not auth.user %}
+    <ul class="navbar-nav">
+        <li><a class="nav-item nav-link" href="{{ path_for('signup') }}">Регистрация</a></li>
+        <li><a class="nav-item nav-link" href="{{ path_for('login') }}">Вход</a></li>
+    </ul>
+    {% else %}
+    <span class="text-light">{{ auth.user.first_name }} {{ auth.user.last_name }}</span>
+    {% if auth.user.isAdmin() %}
+        <a class="btn btn-sm btn-secondary ml-3" href="{{ path_for('admin') }}">Учительская</a>
+    {% endif %}
+    <a class="btn btn-sm btn-secondary ml-3" href="{{ path_for('logout') }}">Выход</a>
+    {% endif %}
+</nav>

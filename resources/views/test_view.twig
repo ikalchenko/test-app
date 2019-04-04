@@ -1,0 +1,33 @@
+{% extends 'templates/base.twig' %}
+
+{% block head %}
+    <title>Тест</title>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-6 offset-md-3">
+        <h1>Тест</h1>
+        <h3>{{ test.test.title }}</h3>
+        <p>{{ test.test.description }}</p>
+        <form action="{{ path_for('test_view', {'id': test.test.id}) }}" method="post">
+            {% for q in test.questions %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ q.text }}</h5>
+                        <p>{{ q.detail }}</p>
+                        {% for o in test.options %}
+                            {% if o.question_id == q.id %}
+                                <div class="form-check">
+                                    <input class="form-check-input ml-1" type="checkbox" id="check{{ o.id }}" name="{{ q.id }}_{{ o.id }}">
+                                    <label class="form-check-label ml-4" for="check{{ o.id }}">{{ o.text }}</label>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+            <button class="btn btn-primary float-right mb-3" type="submit">Проверить</button>
+            {{ csrf.field | raw }}
+        </form>
+    </div>
+{% endblock %}

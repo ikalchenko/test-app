@@ -1,0 +1,17 @@
+{% extends 'templates/base.twig' %}
+
+{% block head %}
+    <title>Tests!</title>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-6 offset-md-3">
+        <h1>Главная</h1>
+        <div class="row">
+            <a href="{{ path_for('test_list') }}" class="btn btn-link">Доступные тесты</a>
+        </div>
+        <div class="row">
+            <a href="{{ path_for('certificate') }}" class="btn btn-link">Мои сертификаты</a>
+        </div>
+    </div>
+{% endblock %}

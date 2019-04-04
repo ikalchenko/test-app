@@ -1,0 +1,24 @@
+{% extends 'templates/base.twig' %}
+
+{% block head %}
+    <title>Добавить тест</title>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-6 offset-md-3">
+        <h1>Новый тест</h1>
+        <form action="{{ path_for('add_test') }}" method="post">
+            <div class="form-group">
+                <label for="title">Название</label>
+                <input type="text" class="form-control" name="test_title" id="title">
+            </div>
+            <div class="form-group">
+                <label for="description">Описание</label>
+                <input type="text" class="form-control" name="test_description" id="description">
+            </div>
+
+            <button class="btn btn-primary mt-2 float-right" type="submit">Создать тест</button>
+            {{ csrf.field | raw }}
+        </form>
+    </div>
+{% endblock %}

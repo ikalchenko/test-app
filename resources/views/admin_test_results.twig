@@ -1,0 +1,47 @@
+{% extends 'templates/base.twig' %}
+
+{% block head %}
+    <title>Результаты</title>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-6 offset-md-3">
+        <h1>Результаты</h1>
+        <h3>{{ results.test.title }}</h3>
+        <p>{{ results.test.description }}</p>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Студент</th>
+                <th scope="col">Дата сдачи</th>
+                <th scope="col">Оценка</th>
+                <th scope="col">Действие</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in results.users %}
+                <tr>
+                    <td>{{ user.fullName() }}</td>
+                    {% for answer in results.answers %}
+                        {% if answer.user_id == user.id %}
+                            <td>{{ answer.updated_at|date("d-m-Y") }}</td>
+                            <td>{{ answer.mark }}</td>
+                            {% if not answer.allow_retake %}
+                                <td>
+                                    <form action="{{ path_for('allow_retake_test', {'test_id': answer.test_id, 'user_id': answer.user_id}) }}" method="post">
+                                        <button class="btn btn-primary">Пересдача</button>
+                                        {{ csrf.field | raw }}
+                                    </form>
+                                </td>
+                            {% else %}
+                                <td>На пересдаче...</td>
+                            {% endif %}
+                        {% endif %}
+
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

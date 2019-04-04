@@ -1,0 +1,14 @@
+{% extends 'templates/base.twig' %}
+
+{% block head %}
+    <title>Тесты</title>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-6 offset-md-3">
+        <h1>Тест пройден</h1>
+        <h2>оценка: {{ mark }} б.</h2>
+        <a href="{{ path_for('gen_pdf', {'id': answer.id}) }}" class="btn btn-primary">Получить сертификат(PDF)</a>
+
+    </div>
+{% endblock %}

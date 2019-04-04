@@ -1,0 +1,58 @@
+{% extends 'templates/base.twig' %}
+
+{% block head %}
+    <title>Добавить вопрос</title>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-6 offset-md-3">
+        <h1>Добавить вопрос</h1>
+        <form action="{{ path_for('add_question', {'id': test.id}) }}" method="post">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="form-group">
+                            <label for="question">Вопрос</label>
+                            <input type="text" class="form-control" name="question" id="question">
+                        </div>
+                        <div class="form-group">
+                            <label for="question">Детали</label>
+                            <textarea type="text" class="form-control" name="detail" id="details"></textarea>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <input type="text" class="form-control w-75 ml-3" name="option_1">
+                                <input type="checkbox" class="ml-3 mt-2" name="check_1" id="check_1">
+                                <label class="form-check-label ml-2 mt-1" for="check_1">Правильный ответ</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <input type="text" class="form-control w-75 ml-3" name="option_2">
+                                <input type="checkbox" class="ml-3 mt-2" name="check_2" id="check_2">
+                                <label class="form-check-label ml-2 mt-1" for="check_2">Правильный ответ</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <input type="text" class="form-control w-75 ml-3" name="option_3">
+                                <input type="checkbox" class="ml-3 mt-2" name="check_3" id="check_3">
+                                <label class="form-check-label ml-2 mt-1" for="check_3">Правильный ответ</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <input type="text" class="form-control w-75 ml-3" name="option_4">
+                                <input type="checkbox" class="ml-3 mt-2" name="check_4" id="check_4">
+                                <label class="form-check-label ml-2 mt-1" for="check_4">Правильный ответ</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <button class="btn btn-primary mt-2 float-right" type="submit">Добавить вопрос</button>
+            <a href="{{ path_for('admin') }}" class="btn btn-link mt-2">Назад в меню</a>
+            {{ csrf.field | raw }}
+        </form>
+    </div>
+{% endblock %}

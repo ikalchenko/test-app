@@ -1,0 +1,22 @@
+{% extends 'templates/base.twig' %}
+
+{% block head %}
+    <title>Тесты</title>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-6 offset-md-3">
+        <h1>Тесты</h1>
+        {% for test in tests %}
+            {% if test.active() %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ test.title }}</h5>
+                    <p class="card-text">{{ test.description }}</p>
+                    <a href="{{ path_for('test_view', {'id': test.id}) }}" class="btn btn-primary">Перейти к тесту</a>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

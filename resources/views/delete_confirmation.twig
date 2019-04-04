@@ -1,0 +1,17 @@
+{% extends 'templates/base.twig' %}
+
+{% block head %}
+    <title>Удалить тест</title>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-6 offset-md-3">
+        <h1>Удалить тест {{ test.title }}</h1>
+        <form action="{{ path_for('delete_test', {'id': test.id}) }}" method="post">
+            <button class="btn btn-danger" type="submit">Удалить</button>
+            <a href="{{ path_for('admin') }}" class="btn btn-link">Отмена</a>
+            {{ csrf.field | raw }}
+        </form>
+
+    </div>
+{% endblock %}

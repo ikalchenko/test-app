@@ -1,0 +1,23 @@
+{% extends 'templates/base.twig' %}
+
+{% block head %}
+    <title>Сертификаты</title>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-6 offset-md-3">
+        <h1>Сертификаты</h1>
+        {% for cert in data.certificates %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    {% for test in data.tests %}
+                        <h5 class="card-title">{% if cert.test_id == test.id %}{{ test.title }}{% endif %}</h5>
+                        <p class="card-text">Оценка: {{ cert.mark }} б.</p>
+                        <a href="{{ path_for('gen_pdf', {'id': cert.id}) }}" class="btn btn-primary">Получить
+                            сертификат (PDF)</a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
